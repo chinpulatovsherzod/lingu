@@ -1,0 +1,304 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum EnglishLevel {
+  A1
+  A2
+  B1
+  B2
+  C1
+  C2
+}
+
+enum LearningGoal {
+  IELTS
+  CAREER
+  TRAVEL
+  COMMUNICATION
+  OTHER
+}
+
+enum LessonType {
+  READING
+  LISTENING
+  WRITING
+  SPEAKING
+  GRAMMAR
+  VOCABULARY
+}
+
+enum StepType {
+  EXPLANATION
+  VOCABULARY
+  MCQ
+  FILL_IN_BLANK
+  MATCHING
+  REORDER
+  READING_COMPREHENSION
+  AUDIO
+}
+
+enum MasteryStatus {
+  NEW
+  LEARNING
+  MASTERED
+}
+
+enum IeltsTestType {
+  FULL
+  READING
+  LISTENING
+  WRITING
+  SPEAKING
+  MINI
+}
+
+model User {
+  id                String        @id @default(cuid())
+  email             String        @unique
+  name              String?
+  lastName          String?       @map("last_name")
+  passwordHash      String?       @map("password_hash")
+  avatarUrl         String?       @map("avatar_url")
+  englishLevel      EnglishLevel? @map("english_level")
+  ieltsTargetBand   Float?        @map("ielts_target_band")
+  learningGoal      LearningGoal? @map("learning_goal")
+  totalXp           Int           @default(0) @map("total_xp")
+  currentLevel      Int           @default(1) @map("current_level")
+  streakCount       Int           @default(0) @map("streak_count")
+  lastActiveDate    DateTime?     @map("last_active_date")
+  weeklyGoalMinutes Int           @default(150) @map("weekly_goal_minutes")
+  createdAt         DateTime      @default(now()) @map("created_at")
+  updatedAt         DateTime      @updatedAt @map("updated_at")
+
+  accounts       Account[]
+  sessions       Session[]
+  lessonProgress UserLessonProgress[]
+  userWords      UserWord[]
+  ieltsTests     IeltsTest[]
+  dailyStats     UserStatsDaily[]
+  achievements   UserAchievement[]
+  mentorChats    MentorChat[]
+
+  @@map("users")
+}
+
+model Account {
+  id                String  @id @default(cuid())
+  userId            String  @map("user_id")
+  type              String
+  provider          String
+  providerAccountId String  @map("provider_account_id")
+  refresh_token     String?
+  access_token      String?
+  expires_at        Int?
+  token_type        String?
+  scope             String?
+  id_token          String?
+  session_state     String?
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([provider, providerAccountId])
+  @@map("accounts")
+}
+
+model Session {
+  id           String   @id @default(cuid())
+  sessionToken String   @unique @map("session_token")
+  userId       String   @map("user_id")
+  expires      DateTime
+  user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@map("sessions")
+}
+
+model Lesson {
+  id              String     @id @default(cuid())
+  title           String
+  description     String
+  type            LessonType
+  cefrLevel       EnglishLevel @map("cefr_level")
+  isIelts         Boolean    @default(false) @map("is_ielts")
+  durationMinutes Int        @map("duration_minutes")
+  xpReward        Int        @map("xp_reward")
+  orderIndex      Int        @map("order_index")
+  thumbnailUrl    String?    @map("thumbnail_url")
+  audioUrl        String?    @map("audio_url")
+  createdAt       DateTime   @default(now()) @map("created_at")
+
+  steps    LessonStep[]
+  progress UserLessonProgress[]
+
+  @@map("lessons")
+}
+
+model LessonStep {
+  id         String   @id @default(cuid())
+  lessonId   String   @map("lesson_id")
+  stepType   StepType @map("step_type")
+  orderIndex Int      @map("order_index")
+  content    Json
+
+  lesson Lesson @relation(fields: [lessonId], references: [id], onDelete: Cascade)
+
+  @@map("lesson_steps")
+}
+
+model UserLessonProgress {
+  id                String    @id @default(cuid())
+  userId            String    @map("user_id")
+  lessonId          String    @map("lesson_id")
+  currentStep       Int       @default(0) @map("current_step")
+  isCompleted       Boolean   @default(false) @map("is_completed")
+  scorePercent      Float?    @map("score_percent")
+  xpEarned          Int       @default(0) @map("xp_earned")
+  timeSpentSeconds  Int       @default(0) @map("time_spent_seconds")
+  completedAt       DateTime? @map("completed_at")
+  updatedAt         DateTime  @updatedAt @map("updated_at")
+
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+  lesson Lesson @relation(fields: [lessonId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, lessonId])
+  @@map("user_lesson_progress")
+}
+
+model Word {
+  id              String       @id @default(cuid())
+  word            String
+  partOfSpeech    String       @map("part_of_speech")
+  definition      String
+  exampleSentence String       @map("example_sentence")
+  cefrLevel       EnglishLevel @map("cefr_level")
+  isIeltsAcademic Boolean      @default(false) @map("is_ielts_academic")
+  topic           String?
+  audioUrl        String?      @map("audio_url")
+  createdAt       DateTime     @default(now()) @map("created_at")
+
+  userWords UserWord[]
+
+  @@map("words")
+}
+
+model UserWord {
+  id              String        @id @default(cuid())
+  userId          String        @map("user_id")
+  wordId          String        @map("word_id")
+  masteryStatus   MasteryStatus @default(NEW) @map("mastery_status")
+  reviewCount     Int           @default(0) @map("review_count")
+  nextReviewDate  DateTime      @default(now()) @map("next_review_date")
+  easeFactor      Float         @default(2.5) @map("ease_factor")
+  lastReviewedAt  DateTime?     @map("last_reviewed_at")
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+  word Word @relation(fields: [wordId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, wordId])
+  @@map("user_words")
+}
+
+model IeltsTest {
+  id             String        @id @default(cuid())
+  userId         String        @map("user_id")
+  testType       IeltsTestType @map("test_type")
+  readingBand    Float?        @map("reading_band")
+  listeningBand  Float?        @map("listening_band")
+  writingBand    Float?        @map("writing_band")
+  speakingBand   Float?        @map("speaking_band")
+  overallBand    Float?        @map("overall_band")
+  answers        Json?
+  aiFeedback     Json?         @map("ai_feedback")
+  takenAt        DateTime      @default(now()) @map("taken_at")
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@map("ielts_tests")
+}
+
+model UserStatsDaily {
+  id               String   @id @default(cuid())
+  userId           String   @map("user_id")
+  date             DateTime
+  minutesStudied   Int      @default(0) @map("minutes_studied")
+  xpEarned         Int      @default(0) @map("xp_earned")
+  lessonsCompleted Int      @default(0) @map("lessons_completed")
+  wordsLearned     Int      @default(0) @map("words_learned")
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, date])
+  @@map("user_stats_daily")
+}
+
+model Achievement {
+  id          String  @id @default(cuid())
+  slug        String  @unique
+  title       String
+  description String
+  icon        String
+  xpReward    Int     @map("xp_reward")
+  requirement Json?
+
+  users UserAchievement[]
+
+  @@map("achievements")
+}
+
+model UserAchievement {
+  id            String   @id @default(cuid())
+  userId        String   @map("user_id")
+  achievementId String @map("achievement_id")
+  earnedAt      DateTime @default(now()) @map("earned_at")
+
+  user        User        @relation(fields: [userId], references: [id], onDelete: Cascade)
+  achievement Achievement @relation(fields: [achievementId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, achievementId])
+  @@map("user_achievements")
+}
+
+model GrammarTopic {
+  id          String       @id @default(cuid())
+  slug        String       @unique
+  title       String
+  description String
+  cefrLevel   EnglishLevel @map("cefr_level")
+  content     Json
+  orderIndex  Int          @map("order_index")
+
+  @@map("grammar_topics")
+}
+
+model MentorChat {
+  id        String   @id @default(cuid())
+  userId    String   @map("user_id")
+  title     String
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+
+  user     User            @relation(fields: [userId], references: [id], onDelete: Cascade)
+  messages MentorMessage[]
+
+  @@index([userId, updatedAt])
+  @@map("mentor_chats")
+}
+
+model MentorMessage {
+  id        String   @id @default(cuid())
+  chatId    String   @map("chat_id")
+  role      String
+  content   String
+  createdAt DateTime @default(now()) @map("created_at")
+
+  chat MentorChat @relation(fields: [chatId], references: [id], onDelete: Cascade)
+
+  @@index([chatId, createdAt])
+  @@map("mentor_messages")
+}

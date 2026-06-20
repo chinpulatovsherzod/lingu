@@ -1,0 +1,89 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: lingoarc-web
+  namespace: default
+  labels:
+    app: lingoarc-web
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: lingoarc-web
+  template:
+    metadata:
+      labels:
+        app: lingoarc-web
+    spec:
+      # Hardening: Run as non-root user
+      securityContext:
+        runAsNonRoot: true
+        runAsUser: 10001
+        runAsGroup: 10001
+        fsGroup: 10001
+      containers:
+        - name: web
+          image: lingoarc-web:latest
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 3000
+              name: http
+          # Hardening: Restrict container privileges
+          securityContext:
+            allowPrivilegeEscalation: false
+            capabilities:
+              drop:
+                - ALL
+          env:
+            - name: NODE_ENV
+              value: "production"
+            - name: PORT
+              value: "3000"
+            - name: HOSTNAME
+              value: "0.0.0.0"
+            - name: USE_PGLITE
+              value: "false"
+            - name: NEXTAUTH_URL
+              value: "https://lingu.uz"
+
+
+            - name: DATABASE_URL
+              valueFrom:
+                secretKeyRef:
+                  name: lingoarc-secrets
+                  key: DATABASE_URL
+            - name: NEXTAUTH_SECRET
+              valueFrom:
+                secretKeyRef:
+                  name: lingoarc-secrets
+                  key: NEXTAUTH_SECRET
+            - name: GEMINI_API_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: lingoarc-secrets
+                  key: GEMINI_API_KEY
+          # Hardening: Limit resources to mitigate DDoS / exhaustion attacks
+          resources:
+            requests:
+              cpu: 100m
+              memory: 256Mi
+            limits:
+              cpu: 500m
+              memory: 512Mi
+          # Healthchecks: ensure system self-healing
+          livenessProbe:
+            httpGet:
+              path: /api/auth/session
+              port: 3000
+            initialDelaySeconds: 30
+            periodSeconds: 15
+            timeoutSeconds: 5
+            failureThreshold: 3
+          readinessProbe:
+            httpGet:
+              path: /api/auth/session
+              port: 3000
+            initialDelaySeconds: 15
+            periodSeconds: 10
+            timeoutSeconds: 3
+            failureThreshold: 3

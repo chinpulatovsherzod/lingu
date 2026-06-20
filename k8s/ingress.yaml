@@ -1,0 +1,37 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: lingoarc-ingress
+  namespace: default
+  annotations:
+    kubernetes.io/ingress.class: "nginx"
+    # Enable TLS Redirect
+    nginx.ingress.kubernetes.io/ssl-redirect: "true"
+    # Hardening: DDoS mitigation using rate limiting
+    nginx.ingress.kubernetes.io/limit-connections: "20"
+    nginx.ingress.kubernetes.io/limit-rps: "10"
+    nginx.ingress.kubernetes.io/limit-burst-multiplier: "3"
+    # Hardening: Security Headers override at Ingress level
+    nginx.ingress.kubernetes.io/configuration-snippet: |
+      more_set_headers "X-Frame-Options: DENY";
+      more_set_headers "X-Content-Type-Options: nosniff";
+      more_set_headers "X-XSS-Protection: 1; mode=block";
+      more_set_headers "Content-Security-Policy: default-src 'self' https: data: 'unsafe-inline' 'unsafe-eval';";
+spec:
+  tls:
+    - hosts:
+        - lingu.uz
+      secretName: lingu-tls-cert
+  rules:
+    - host: lingu.uz
+
+
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: lingoarc-service
+                port:
+                  number: 80

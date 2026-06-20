@@ -1,0 +1,72 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 224 71% 4%;
+    --foreground: 210 40% 98%;
+    --card: 224 40% 7%;
+    --card-foreground: 210 40% 98%;
+    --muted: 224 30% 12%;
+    --muted-foreground: 215 20% 65%;
+    --border: 224 30% 14%;
+    --input: 224 30% 14%;
+    --ring: 263 90% 70%;
+    --radius: 1rem;
+  }
+
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground font-sans antialiased min-h-screen relative overflow-x-hidden;
+    /* Soft premium ambient radial glow background spots */
+    background-image: 
+      radial-gradient(at 0% 0%, hsla(263, 60%, 20%, 0.15) 0px, transparent 50%),
+      radial-gradient(at 50% 0%, hsla(244, 50%, 25%, 0.12) 0px, transparent 50%),
+      radial-gradient(at 100% 0%, hsla(190, 60%, 20%, 0.10) 0px, transparent 50%);
+    background-attachment: fixed;
+  }
+
+  h1, h2, h3, h4 {
+    @apply font-heading tracking-wide;
+  }
+
+  /* Thin, elegant, modern scrollbar styles */
+  ::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
+  ::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: rgba(108, 99, 255, 0.2);
+    border-radius: 99px;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: rgba(108, 99, 255, 0.4);
+  }
+}
+
+/* Custom premium aesthetic utilities */
+@layer utilities {
+  .glass {
+    @apply bg-card/45 backdrop-blur-md border border-border/40;
+  }
+  
+  .glass-header {
+    @apply bg-card/60 backdrop-blur-lg border border-border/50 shadow-lg shadow-black/10;
+  }
+
+  .premium-card {
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  .premium-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 12px 24px -10px rgba(108, 99, 255, 0.2);
+    border-color: rgba(108, 99, 255, 0.4);
+  }
+}
