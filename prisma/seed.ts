@@ -238,7 +238,7 @@ async function main() {
   }
 
   await prisma.$disconnect();
-  console.log("Done! Demo login: demo@lingoarc.com / demo1234");
+  console.log("Done! Demo login: demo@lingu.uz / demo1234");
 }
 
 main().catch((e) => {
