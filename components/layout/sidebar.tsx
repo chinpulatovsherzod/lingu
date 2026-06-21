@@ -46,8 +46,8 @@ export function Sidebar() {
   const content = (
     <>
       <div className="flex items-center gap-3 px-5 py-6 border-b border-border/20 mb-4 bg-muted/10">
-        <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-primary shadow-lg shadow-primary/20">
-          <Sparkles className="h-5 w-5 text-white" />
+        <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-primary shadow-lg shadow-primary/20 overflow-hidden p-0.5">
+          <img src="/logo.png" alt="Lingu logo" className="h-full w-full object-cover rounded-lg" />
         </div>
         <div>
           <p className="font-heading text-lg font-bold tracking-wider text-foreground">Lingu</p>
