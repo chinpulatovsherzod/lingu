@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Syne, DM_Sans } from "next/font/google";
+import { Syne, DM_Sans, Caveat } from "next/font/google";
 import "./globals.css";
 import { Providers } from "./providers";
 import { getDictionary, getLocale } from "@/lib/i18n";
@@ -14,6 +14,11 @@ const dmSans = DM_Sans({
   variable: "--font-dm-sans",
 });
 
+const caveat = Caveat({
+  subsets: ["latin"],
+  variable: "--font-caveat",
+});
+
 export async function generateMetadata(): Promise<Metadata> {
   const locale = await getLocale();
   const t = getDictionary(locale);
@@ -24,7 +29,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
   const locale = await getLocale();
   return (
     <html lang={locale} className="dark">
-      <body className={`${syne.variable} ${dmSans.variable} min-h-screen`}>
+      <body className={`${syne.variable} ${dmSans.variable} ${caveat.variable} min-h-screen`}>
         <Providers locale={locale}>{children}</Providers>
       </body>
     </html>
