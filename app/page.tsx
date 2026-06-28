@@ -2,6 +2,7 @@ import { auth } from "@/lib/auth";
 import { redirect } from "next/navigation";
 import { getLocale } from "@/lib/i18n";
 import Link from "next/link";
+import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import { LanguageSwitcher } from "@/components/i18n/language-switcher";
 import { BookOpen, GraduationCap, Gamepad2, Play, Building, ShieldCheck, HelpCircle, CheckCircle2 } from "lucide-react";
@@ -174,8 +175,8 @@ export default async function Home() {
         <div className="mx-auto flex max-w-7xl h-16 items-center justify-between px-4 sm:px-6 lg:px-8">
           <div className="flex items-center gap-8">
             <Link href="/" className="flex items-center gap-2">
-              <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-primary overflow-hidden p-0.5">
-                <img src="/logo.png" alt="Lingu logo" className="h-full w-full object-cover rounded-md" />
+              <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-primary overflow-hidden p-0.5 relative">
+                <Image src="/logo.png" alt="Lingu logo" width={32} height={32} className="h-full w-full object-cover rounded-md" />
               </div>
               <span className="font-heading text-lg font-bold tracking-wider text-white">Lingu</span>
             </Link>
@@ -257,9 +258,12 @@ export default async function Home() {
             {/* Ambient glows behind the hero image */}
             <div className="absolute -inset-1 rounded-3xl bg-gradient-to-r from-primary to-accent opacity-20 blur-2xl" />
             <div className="relative glass p-2 rounded-3xl overflow-hidden shadow-2xl border-border/30">
-              <img 
+              <Image 
                 src="/landing-hero.png" 
                 alt="Students learning English with Lingu" 
+                width={600}
+                height={400}
+                priority
                 className="w-full h-auto object-cover rounded-2xl shadow-inner"
               />
             </div>

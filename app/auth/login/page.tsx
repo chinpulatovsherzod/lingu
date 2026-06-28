@@ -3,6 +3,7 @@
 
 
 import Link from "next/link";
+import Image from "next/image";
 
 import { signIn } from "next-auth/react";
 
@@ -82,9 +83,9 @@ export default function LoginPage() {
 
         </div>
 
-        <div className="mx-auto mb-2 flex h-12 w-12 items-center justify-center rounded-xl bg-primary overflow-hidden p-0.5">
+        <div className="mx-auto mb-2 flex h-12 w-12 items-center justify-center rounded-xl bg-primary overflow-hidden p-0.5 relative">
 
-          <img src="/logo.png" alt="Lingu logo" className="h-full w-full object-cover rounded-lg" />
+          <Image src="/logo.png" alt="Lingu logo" width={48} height={48} className="h-full w-full object-cover rounded-lg" />
 
         </div>
 
