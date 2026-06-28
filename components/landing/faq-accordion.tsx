@@ -34,7 +34,7 @@ export function FaqAccordion({ items }: FaqAccordionProps) {
           >
             <button
               onClick={() => toggle(idx)}
-              className="flex w-full items-center justify-between p-5 text-left font-semibold text-white focus:outline-none"
+              className="flex w-full items-center justify-between p-5 text-left font-semibold text-foreground focus:outline-none"
             >
               <span className="text-base sm:text-lg">{item.question}</span>
               <ChevronDown

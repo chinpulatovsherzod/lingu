@@ -211,7 +211,7 @@ export function InteractiveCourses({ locale, ru, en, uz }: InteractiveCoursesPro
               "flex items-center justify-between px-5 py-4 rounded-xl border text-left font-semibold transition-all duration-300 w-full min-w-[120px] lg:min-w-0",
               selectedLevel === level
                 ? "bg-primary border-primary text-white shadow-lg shadow-primary/20 scale-[1.02]"
-                : "bg-card/45 border-border/40 text-muted-foreground hover:text-white hover:border-border/80 hover:bg-card/60"
+                : "bg-card/45 border-border/40 text-muted-foreground hover:text-foreground hover:border-border/80 hover:bg-card/70"
             )}
           >
             <span>{level} {courses[level].name}</span>
@@ -234,7 +234,7 @@ export function InteractiveCourses({ locale, ru, en, uz }: InteractiveCoursesPro
 
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-border/40 pb-4">
           <div>
-            <h3 className="text-2xl font-bold text-white font-heading">
+            <h3 className="text-2xl font-bold text-foreground font-heading">
               {activeCourse.code} · {activeCourse.name}
             </h3>
             <p className="text-xs text-primary font-medium tracking-wider uppercase mt-1">
@@ -252,7 +252,7 @@ export function InteractiveCourses({ locale, ru, en, uz }: InteractiveCoursesPro
         </p>
 
         <div className="space-y-3">
-          <h4 className="text-sm font-semibold text-white uppercase tracking-wider">
+          <h4 className="text-sm font-semibold text-foreground uppercase tracking-wider">
             {locale === "uz" ? "Nimalarni o'rganasiz:" : locale === "en" ? "What you will learn:" : "Чему вы научитесь:"}
           </h4>
           <div className="grid sm:grid-cols-2 gap-3">

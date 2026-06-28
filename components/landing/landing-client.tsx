@@ -173,22 +173,22 @@ export function LandingClient() {
               <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-primary overflow-hidden p-0.5 relative">
                 <Image src="/logo.png" alt="Lingu logo" width={32} height={32} className="h-full w-full object-cover rounded-md" />
               </div>
-              <span className="font-heading text-lg font-bold tracking-wider text-white">Lingu</span>
+              <span className="font-heading text-lg font-bold tracking-wider text-foreground">Lingu</span>
             </Link>
             <nav className="hidden md:flex items-center gap-6">
-              <a href="#courses" className="text-sm text-muted-foreground hover:text-white transition cursor-pointer font-medium">
+              <a href="#courses" className="text-sm text-muted-foreground hover:text-foreground transition cursor-pointer font-medium">
                 {t.navLearn}
               </a>
-              <a href="#how-it-works" className="text-sm text-muted-foreground hover:text-white transition cursor-pointer font-medium">
+              <a href="#how-it-works" className="text-sm text-muted-foreground hover:text-foreground transition cursor-pointer font-medium">
                 {t.navHow}
               </a>
-              <a href="#enterprise" className="text-sm text-muted-foreground hover:text-white transition cursor-pointer font-medium">
+              <a href="#enterprise" className="text-sm text-muted-foreground hover:text-foreground transition cursor-pointer font-medium">
                 {t.navEnterprise}
               </a>
-              <a href="#features" className="text-sm text-muted-foreground hover:text-white transition cursor-pointer font-medium">
+              <a href="#features" className="text-sm text-muted-foreground hover:text-foreground transition cursor-pointer font-medium">
                 {t.navResources}
               </a>
-              <a href="#faq" className="text-sm text-muted-foreground hover:text-white transition cursor-pointer font-medium">
+              <a href="#faq" className="text-sm text-muted-foreground hover:text-foreground transition cursor-pointer font-medium">
                 {t.navFaq}
               </a>
             </nav>
@@ -197,7 +197,7 @@ export function LandingClient() {
             <ThemeToggle />
             <LanguageSwitcher />
             <Link href="/auth/login">
-              <Button variant="ghost" size="sm" className="text-white hover:bg-muted/50 text-xs sm:text-sm">
+              <Button variant="ghost" size="sm" className="text-foreground hover:bg-muted/50 text-xs sm:text-sm">
                 {t.loginBtn}
               </Button>
             </Link>
@@ -223,7 +223,7 @@ export function LandingClient() {
               </span>
             </div>
             
-            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight leading-tight text-white font-heading">
+            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight leading-tight text-foreground font-heading">
               {t.heroTitlePart1}
               <span className="text-primary font-cursive text-5xl sm:text-6xl lg:text-7xl block sm:inline-block mx-1">
                 {t.heroTitleHorizons}
@@ -268,24 +268,24 @@ export function LandingClient() {
 
         {/* How It Works Section */}
         <section id="how-it-works" className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-16 border-t border-border/20 scroll-mt-20">
-          <h2 className="text-3xl font-bold text-center text-white font-heading mb-4">
+          <h2 className="text-3xl font-bold text-center text-foreground font-heading mb-4">
             {t.howItWorksTitle}
           </h2>
           <div className="h-0.5 w-16 bg-primary mx-auto mb-12" />
           <div className="grid md:grid-cols-3 gap-8">
             <div className="glass p-6 rounded-2xl border-border/30 space-y-3 relative overflow-hidden">
               <div className="absolute -right-8 -top-8 h-20 w-20 rounded-full bg-primary/5 blur-xl" />
-              <h3 className="text-xl font-bold text-white font-heading">{t.howItWorksStep1}</h3>
+              <h3 className="text-xl font-bold text-foreground font-heading">{t.howItWorksStep1}</h3>
               <p className="text-sm text-muted-foreground leading-relaxed">{t.howItWorksStep1Text}</p>
             </div>
             <div className="glass p-6 rounded-2xl border-border/30 space-y-3 relative overflow-hidden">
               <div className="absolute -right-8 -top-8 h-20 w-20 rounded-full bg-primary/5 blur-xl" />
-              <h3 className="text-xl font-bold text-white font-heading">{t.howItWorksStep2}</h3>
+              <h3 className="text-xl font-bold text-foreground font-heading">{t.howItWorksStep2}</h3>
               <p className="text-sm text-muted-foreground leading-relaxed">{t.howItWorksStep2Text}</p>
             </div>
             <div className="glass p-6 rounded-2xl border-border/30 space-y-3 relative overflow-hidden">
               <div className="absolute -right-8 -top-8 h-20 w-20 rounded-full bg-primary/5 blur-xl" />
-              <h3 className="text-xl font-bold text-white font-heading">{t.howItWorksStep3}</h3>
+              <h3 className="text-xl font-bold text-foreground font-heading">{t.howItWorksStep3}</h3>
               <p className="text-sm text-muted-foreground leading-relaxed">{t.howItWorksStep3Text}</p>
             </div>
           </div>
@@ -293,7 +293,7 @@ export function LandingClient() {
 
         {/* Interactive Courses Selector Section */}
         <section id="courses" className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-16 border-t border-border/20 scroll-mt-20">
-          <h2 className="text-3xl font-bold text-center text-white font-heading mb-2">
+          <h2 className="text-3xl font-bold text-center text-foreground font-heading mb-2">
             {t.coursesTitle}
           </h2>
           <p className="text-center text-muted-foreground text-sm max-w-md mx-auto mb-12">
@@ -312,7 +312,7 @@ export function LandingClient() {
               <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-primary/10 border border-primary/20 text-primary mx-auto lg:mx-0">
                 <Building className="h-6 w-6" />
               </div>
-              <h3 className="text-2xl sm:text-3xl font-bold text-white font-heading">
+              <h3 className="text-2xl sm:text-3xl font-bold text-foreground font-heading">
                 {t.enterpriseTitle}
               </h3>
               <p className="text-sm sm:text-base text-muted-foreground leading-relaxed">
@@ -332,7 +332,7 @@ export function LandingClient() {
 
         {/* Features Highlights Section */}
         <section id="features" className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-16 border-t border-border/20 scroll-mt-20">
-          <h2 className="text-3xl font-bold text-center text-white font-heading mb-12">
+          <h2 className="text-3xl font-bold text-center text-foreground font-heading mb-12">
             {t.featuresTitle}
           </h2>
           <div className="grid md:grid-cols-3 gap-8">
@@ -341,7 +341,7 @@ export function LandingClient() {
               <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-primary/10 border border-primary/20 text-primary">
                 <GraduationCap className="h-6 w-6" />
               </div>
-              <h3 className="text-xl font-bold text-white font-heading">{t.featureIeltsTitle}</h3>
+              <h3 className="text-xl font-bold text-foreground font-heading">{t.featureIeltsTitle}</h3>
               <p className="text-sm text-muted-foreground leading-relaxed">{t.featureIeltsDesc}</p>
             </div>
             
@@ -350,7 +350,7 @@ export function LandingClient() {
               <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-primary/10 border border-primary/20 text-primary">
                 <BookOpen className="h-6 w-6" />
               </div>
-              <h3 className="text-xl font-bold text-white font-heading">{t.featureDictTitle}</h3>
+              <h3 className="text-xl font-bold text-foreground font-heading">{t.featureDictTitle}</h3>
               <p className="text-sm text-muted-foreground leading-relaxed">{t.featureDictDesc}</p>
             </div>
 
@@ -359,7 +359,7 @@ export function LandingClient() {
               <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-primary/10 border border-primary/20 text-primary">
                 <Gamepad2 className="h-6 w-6" />
               </div>
-              <h3 className="text-xl font-bold text-white font-heading">{t.featureArenaTitle}</h3>
+              <h3 className="text-xl font-bold text-foreground font-heading">{t.featureArenaTitle}</h3>
               <p className="text-sm text-muted-foreground leading-relaxed">{t.featureArenaDesc}</p>
             </div>
           </div>
@@ -367,7 +367,7 @@ export function LandingClient() {
 
         {/* FAQ Section */}
         <section id="faq" className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-16 border-t border-border/20 scroll-mt-20">
-          <h2 className="text-3xl font-bold text-center text-white font-heading mb-12">
+          <h2 className="text-3xl font-bold text-center text-foreground font-heading mb-12">
             {t.faqTitle}
           </h2>
           <FaqAccordion items={faqItems} />
