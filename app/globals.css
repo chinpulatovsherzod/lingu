@@ -7,6 +7,19 @@
     scroll-behavior: smooth;
   }
   :root {
+    --background: 0 0% 98%;
+    --foreground: 222.2 84% 4.9%;
+    --card: 0 0% 100%;
+    --card-foreground: 222.2 84% 4.9%;
+    --muted: 210 40% 96.1%;
+    --muted-foreground: 215.4 16.3% 46.9%;
+    --border: 214.3 31.8% 91.4%;
+    --input: 214.3 31.8% 91.4%;
+    --ring: 262.1 83.3% 57.8%;
+    --radius: 1rem;
+  }
+
+  .dark {
     --background: 224 71% 4%;
     --foreground: 210 40% 98%;
     --card: 224 40% 7%;
@@ -16,7 +29,6 @@
     --border: 224 30% 14%;
     --input: 224 30% 14%;
     --ring: 263 90% 70%;
-    --radius: 1rem;
   }
 
   * {
@@ -24,8 +36,11 @@
   }
 
   body {
-    @apply bg-background text-foreground font-sans antialiased min-h-screen relative overflow-x-hidden;
-    /* Soft premium ambient radial glow background spots */
+    @apply bg-background text-foreground font-sans antialiased min-h-screen relative overflow-x-hidden transition-colors duration-300;
+  }
+
+  .dark body {
+    /* Soft premium ambient radial glow background spots for dark mode */
     background-image: 
       radial-gradient(at 0% 0%, hsla(263, 60%, 20%, 0.15) 0px, transparent 50%),
       radial-gradient(at 50% 0%, hsla(244, 50%, 25%, 0.12) 0px, transparent 50%),

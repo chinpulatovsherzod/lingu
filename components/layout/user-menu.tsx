@@ -13,6 +13,7 @@ import { Button, buttonVariants } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 
 import { LanguageSwitcher } from "@/components/i18n/language-switcher";
+import { ThemeToggle } from "./theme-toggle";
 
 import { useI18n } from "@/components/i18n/locale-provider";
 
@@ -27,6 +28,8 @@ export function UserMenu({ name }: { name?: string | null }) {
   return (
 
     <div className="flex items-center gap-2 sm:gap-3">
+
+      <ThemeToggle />
 
       <LanguageSwitcher />
 

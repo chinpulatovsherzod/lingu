@@ -26,11 +26,15 @@ export function LocaleProvider({
   const setLocale = useCallback(
     async (next: Locale) => {
       if (next === locale) return;
-      await fetch("/api/locale", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ locale: next }),
-      });
+      try {
+        await fetch("/api/locale", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ locale: next }),
+        });
+      } catch (e) {
+        console.error("Failed to persist locale:", e);
+      }
       setLocaleState(next);
       router.refresh();
     },

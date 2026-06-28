@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { cookies } from "next/headers";
 import { Syne, DM_Sans, Caveat } from "next/font/google";
 import "./globals.css";
 import { Providers } from "./providers";
@@ -27,8 +28,11 @@ export async function generateMetadata(): Promise<Metadata> {
 
 export default async function RootLayout({ children }: { children: React.ReactNode }) {
   const locale = await getLocale();
+  const cookieStore = await cookies();
+  const theme = cookieStore.get("lingu_theme")?.value || "dark";
+
   return (
-    <html lang={locale} className="dark">
+    <html lang={locale} className={theme}>
       <body className={`${syne.variable} ${dmSans.variable} ${caveat.variable} min-h-screen`}>
         <Providers locale={locale}>{children}</Providers>
       </body>

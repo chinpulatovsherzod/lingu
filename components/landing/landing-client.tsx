@@ -8,6 +8,7 @@ import { BookOpen, GraduationCap, Gamepad2, Play, Building } from "lucide-react"
 import Image from "next/image";
 import { InteractiveCourses } from "@/components/landing/interactive-courses";
 import { FaqAccordion } from "@/components/landing/faq-accordion";
+import { ThemeToggle } from "@/components/layout/theme-toggle";
 
 // Local translations for the landing page to keep it clean and isolated
 const dict = {
@@ -193,6 +194,7 @@ export function LandingClient() {
             </nav>
           </div>
           <div className="flex items-center gap-2 sm:gap-4">
+            <ThemeToggle />
             <LanguageSwitcher />
             <Link href="/auth/login">
               <Button variant="ghost" size="sm" className="text-white hover:bg-muted/50 text-xs sm:text-sm">
