@@ -1322,6 +1322,73 @@ export const TENSE_TOPICS: TenseTopic[] = [
       },
     ],
   },
+  {
+    slug: "active-passive-voice",
+    title: "Active and Passive Voice",
+    titleRu: "Активный и пассивный залог",
+    group: "Grammar",
+    groupRu: "Грамматика",
+    level: "B1",
+    icon: "layers",
+    purpose: "Active Voice (Активный залог) используется, когда подлежащее само выполняет действие. Passive Voice (Пассивный залог) используется, когда действие направлено на подлежащее.",
+    example: {
+      en: "John writes the letter. → The letter is written by John.",
+      ru: "Джон пишет письмо. → Письмо пишется Джоном."
+    },
+    formulaLabels: {
+      affirmative: "Утверждение (+)",
+      negative: "Отрицание (-)",
+      question: "Вопрос (?)"
+    },
+    formulas: {
+      affirmative: "Active: S + V + O  |  Passive: O + to be (am/is/are/was/were/etc.) + V3",
+      negative: "Active: S + do/does/did not + V + O  |  Passive: O + to be + not + V3",
+      question: "Active: Do/Does/Did + S + V + O?  |  Passive: To be + O + V3?",
+      note: "Время предложения в пассивном залоге определяется формой вспомогательного глагола 'to be'. Смысловой глагол всегда стоит в третьей форме (Past Participle / V3).",
+      examples: {
+        affirmative: [
+          { en: "Active: She drinks coffee every morning. → Passive: Coffee is drunk by her every morning.", ru: "Она пьет кофе каждое утро. → Кофе пьется ею каждое утро." },
+          { en: "Active: They built the house in 2020. → Passive: The house was built by them in 2020.", ru: "Они построили дом в 2020 году. → Дом был построен ими в 2020 году." }
+        ],
+        negative: [
+          { en: "Active: John does not write the letter. → Passive: The letter is not written by John.", ru: "Джон не пишет письмо. → Письмо не пишется Джоном." }
+        ],
+        question: [
+          { en: "Active: Did they build the house? → Passive: Was the house built by them?", ru: "Они построили дом? → Был ли дом построен ими?" }
+        ]
+      }
+    },
+    rules: [
+      {
+        rule: "Как преобразовать Active в Passive",
+        examples: [
+          { en: "1. Переместите дополнение (Object) на место подлежащего (Subject).", ru: "Active: The company produces cars. → Passive: Cars..." },
+          { en: "2. Поставьте глагол 'to be' в то же время, в котором стоял смысловой глагол в активном залоге.", ru: "Active: produces (Present Simple) → Passive: are (Present Simple)" },
+          { en: "3. Смысловой глагол переведите в третью форму (Past Participle / V3).", ru: "Active: produces → Passive: produced" },
+          { en: "4. Старое подлежащее поставьте после предлога 'by' в конце предложения (при необходимости).", ru: "Active: The company → Passive: ...by the company." }
+        ]
+      },
+      {
+        rule: "Когда использовать Passive Voice (случаи употребления)",
+        examples: [
+          { en: "1. Когда неизвестно, кто выполняет действие: My phone was stolen.", ru: "Мой телефон был украден (кто именно украл — неизвестно)." },
+          { en: "2. Когда исполнитель не важен, акцент на самом действии: 1000 cars are produced yearly.", ru: "1000 машин производится ежегодно (важен продукт, а не фабрика)." },
+          { en: "3. В официальном стиле, новостях и научных отчетах: The experiment was conducted.", ru: "Эксперимент был проведен." },
+          { en: "4. Когда вы хотите звучать более вежливо при ошибках: A mistake was made.", ru: "Была допущена ошибка (вежливее, чем 'Вы сделали ошибку')." }
+        ]
+      }
+    ],
+    extra: [
+      {
+        title: "Таблица преобразования времен (Active → Passive)",
+        content: "• Present Simple: write / writes → is / are written\n• Past Simple: wrote → was / were written\n• Present Continuous: is / are drinking → is / are being drunk\n• Past Continuous: was / were building → was / were being built\n• Present Perfect: has / have written → has / have been written\n• Past Perfect: had produced → had been produced\n• Future Simple: will write → will be written\n• Future Continuous: will be writing → will be being written (крайне редко)\n• Modal Verbs (can/must/should): modal + write → modal + be + written"
+      },
+      {
+        title: "Глаголы состояния, которые НЕ употребляются в Passive Voice",
+        content: "Пассивный залог образуют только переходные глаголы (транзитивные), за которыми следует прямое дополнение.\nГлаголы состояния и непереходные глаголы НЕЛЬЗЯ ставить в пассив:\n❌ have, own, like, love, hate, want, need, know, understand, believe, seem, appear, exist, happen, cost, suit, fit, contain, consist of, resemble, weigh, measure\n\nНеправильно: ❌ This book is owned by me. / This dress is suited by her.\nПравильно:   ✅ I own this book. / This dress suits her."
+      }
+    ]
+  }
 ];
 
 export const FORMULA_LEGEND = {

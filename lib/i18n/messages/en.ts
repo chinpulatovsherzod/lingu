@@ -174,6 +174,10 @@ export const en: Messages = {
         title: "Modal Verbs in Passive Voice",
         purpose: "Modal verbs (can, must, should) in passive: Modal + be + V3. Focus on the object of the action, not the doer.",
       },
+      "active-passive-voice": {
+        title: "Active and Passive Voice",
+        purpose: "Learn the difference between active and passive voice, standard formulas, transformations, cases of use, and exceptions.",
+      },
     },
     quiz: {
       practice: "Check yourself",

@@ -174,6 +174,10 @@ export const uz: Messages = {
         title: "Passiv ovozdagi modal fe'llar",
         purpose: "Modal fe'llar (can, must, should) passivda: Modal + be + V3. E'tibor harakat obyektiga qaratiladi.",
       },
+      "active-passive-voice": {
+        title: "Faol va majhul nisbat (Active & Passive Voice)",
+        purpose: "Faol va majhul nisbatlar farqi, standart shakllar, gaplarni o'zgartirish qoidalari, foydalanish holatlari va istisnolarni o'rganing.",
+      },
     },
     quiz: {
       practice: "O'zingizni tekshiring",

@@ -397,6 +397,118 @@ export const LESSON_QUIZZES: Record<string, ExplainedQuizItem[]> = {
       ]
     ),
   ],
+  "active-passive-voice": [
+    q(
+      "The letter _____ by the secretary yesterday.",
+      0,
+      ["was written", "is written", "writes", "was writing"],
+      [
+        "Правильно: Past Simple passive = was + V3 (written) для ед. числа (the letter).",
+        "Неверно: это настоящее время, а действие было вчера (yesterday).",
+        "Неверно: это активный залог (пишет), а письмо не может писать само себя.",
+        "Неверно: это Past Continuous active, письмо не выполняло действие."
+      ]
+    ),
+    q(
+      "The house _____ in 1990.",
+      1,
+      ["was build", "was built", "built", "were built"],
+      [
+        "Неверно: build — первая форма, а после was нужна третья (built).",
+        "Правильно: was + built (V3) для прошедшего времени пассива в ед. числе.",
+        "Неверно: дом не строил ничего сам (активный залог).",
+        "Неверно: подлежащее (The house) в единственном числе, поэтому was, а не were."
+      ]
+    ),
+    q(
+      "The dinner _____ by 7 PM.",
+      0,
+      ["will be cooked", "will cook", "is cook", "will cooked"],
+      [
+        "Правильно: Future Simple passive = will be + cooked (V3).",
+        "Неверно: это активный залог, означающий, что ужин сам будет кого-то готовить.",
+        "Неверно: некорректная грамматическая конструкция.",
+        "Неверно: пропущен глагол be после will."
+      ]
+    ),
+    q(
+      "Look! The new bridge _____ right now.",
+      0,
+      ["is being built", "is building", "built", "has been built"],
+      [
+        "Правильно: Present Continuous passive = is being + built (V3) для процесса прямо сейчас.",
+        "Неверно: мост не строит сам себя (активный залог).",
+        "Неверно: Past Simple active не выражает процесс в данный момент.",
+        "Неверно: Present Perfect выражает завершенность, а не длящийся процесс."
+      ]
+    ),
+    q(
+      "This difficult task _____ by tomorrow.",
+      0,
+      ["can be completed", "can completed", "can be complete", "could complete"],
+      [
+        "Правильно: модальный пассив = modal + be + V3 (completed).",
+        "Неверно: пропущен обязательный глагол be.",
+        "Неверно: нужна третья форма глагола (completed), а не первая (complete).",
+        "Неверно: активный залог здесь не подходит по смыслу."
+      ]
+    ),
+    q(
+      "The windows _____ every week.",
+      1,
+      ["clean", "are cleaned", "were cleaned", "is cleaned"],
+      [
+        "Неверно: окна не могут мыть сами себя (активный залог).",
+        "Правильно: Present Simple passive во мн. числе (are cleaned) для регулярных действий.",
+        "Неверно: это прошедшее время, а действие происходит регулярно (every week).",
+        "Неверно: подлежащее (The windows) во множественном числе, поэтому are, а не is."
+      ]
+    ),
+    q(
+      "The experiment _____ by the scientists yesterday.",
+      0,
+      ["was conducted", "conducted", "is conducted", "was conducting"],
+      [
+        "Правильно: Past Simple passive = was + V3 (conducted).",
+        "Неверно: это активный залог, но эксперимент не проводил сам себя.",
+        "Неверно: это настоящее время, а действие было вчера (yesterday).",
+        "Неверно: активная форма Past Continuous."
+      ]
+    ),
+    q(
+      "A mistake _____ in the report. (вежливый способ сказать об ошибке)",
+      0,
+      ["was made", "made", "was make", "is making"],
+      [
+        "Правильно: пассивный залог 'was made' делает фразу вежливее, не обвиняя никого конкретно.",
+        "Неверно: это активный залог, требующий указания того, кто сделал ошибку.",
+        "Неверно: после was должна быть третья форма глагола (made), а не первая (make).",
+        "Неверно: активная форма Present Continuous."
+      ]
+    ),
+    q(
+      "Какое предложение грамматически НЕВЕРНО?",
+      0,
+      ["This car is owned by my brother.", "My brother owns this car.", "The car was repaired yesterday.", "This homework must be done today."],
+      [
+        "Правильно: глагол состояния 'own' нельзя использовать в пассивном залоге.",
+        "Неверно: это правильное активное предложение.",
+        "Неверно: пассивный залог в Past Simple построен правильно.",
+        "Неверно: пассив с модальным глаголом построен правильно."
+      ]
+    ),
+    q(
+      "Our house _____ when we were on vacation.",
+      0,
+      ["was being painted", "was painting", "painted", "has been painted"],
+      [
+        "Правильно: Past Continuous passive = was being + V3 для процесса в определенный момент прошлого.",
+        "Неверно: дом не красил сам себя.",
+        "Неверно: это активная форма прошедшего времени.",
+        "Неверно: Present Perfect не сочетается с указанием конкретного прошедшего времени (when we were...)."
+      ]
+    ),
+  ],
 };
 
 export function getLessonQuizzes(slug: string): ExplainedQuizItem[] {
