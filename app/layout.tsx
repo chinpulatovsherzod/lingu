@@ -23,7 +23,13 @@ const caveat = Caveat({
 export async function generateMetadata(): Promise<Metadata> {
   const locale = await getLocale();
   const t = getDictionary(locale);
-  return { title: t.meta.title, description: t.meta.description };
+  return {
+    title: t.meta.title,
+    description: t.meta.description,
+    verification: {
+      google: "APjtompWvNQvTaMNq78orxbiNeNwNwrsigjH8A1gK6U",
+    },
+  };
 }
 
 export default async function RootLayout({ children }: { children: React.ReactNode }) {
