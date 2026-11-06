@@ -149,15 +149,12 @@ export default function IeltsListeningPage() {
     }
   };
 
-  // Sync state when audioPlaying toggle occurs
+  // Cleanup speech synthesis on unmount
   useEffect(() => {
-    if (audioPlaying && currentLineIdx !== -1) {
-      speakLine(currentLineIdx);
-    }
     return () => {
       window.speechSynthesis.cancel();
     };
-  }, [audioPlaying, speakLine]);
+  }, []);
 
   const stopAudio = () => {
     window.speechSynthesis.cancel();

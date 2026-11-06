@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef, useCallback, useMemo } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Progress } from "@/components/ui/progress";
@@ -35,7 +35,10 @@ const FALLBACK_WORDS = [
 const TIME_LIMIT = 10; // seconds per word
 
 export function SpeedCardsGame({ userWords }: SpeedCardsProps) {
-  const wordsList = userWords && userWords.length >= 4 ? userWords : FALLBACK_WORDS;
+  const wordsList = useMemo(
+    () => (userWords && userWords.length >= 4 ? userWords : FALLBACK_WORDS),
+    [userWords]
+  );
 
   const [shuffledList, setShuffledList] = useState<WordItem[]>([]);
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -57,9 +60,11 @@ export function SpeedCardsGame({ userWords }: SpeedCardsProps) {
   const [xpRewarded, setXpRewarded] = useState(false);
 
   const timerRef = useRef<NodeJS.Timeout | null>(null);
+  const handleTimeoutRef = useRef<() => void>(() => {});
+  const handleAnswerRef = useRef<(option: string) => void>(() => {});
 
   // Initialize and shuffle words
-  const initGame = () => {
+  const initGame = useCallback(() => {
     const shuffled = [...wordsList].sort(() => Math.random() - 0.5);
     setShuffledList(shuffled);
     setCurrentIndex(0);
@@ -75,14 +80,14 @@ export function SpeedCardsGame({ userWords }: SpeedCardsProps) {
     setIsAnswered(false);
     setSelectedOption(null);
     setTimeLeft(TIME_LIMIT);
-  };
+  }, [wordsList]);
 
   useEffect(() => {
     initGame();
     return () => {
       if (timerRef.current) clearInterval(timerRef.current);
     };
-  }, [userWords]);
+  }, [initGame]);
 
   // Generate options when current index changes
   useEffect(() => {
@@ -109,7 +114,7 @@ export function SpeedCardsGame({ userWords }: SpeedCardsProps) {
 
     // Audio pronunciation
     speakWord(currentWord.word.word);
-  }, [currentIndex, shuffledList, isPlaying]);
+  }, [currentIndex, shuffledList, isPlaying, wordsList]);
 
   // Timer effect
   useEffect(() => {
@@ -119,7 +124,7 @@ export function SpeedCardsGame({ userWords }: SpeedCardsProps) {
       setTimeLeft((prev) => {
         if (prev <= 1) {
           clearInterval(timerRef.current!);
-          handleTimeout();
+          handleTimeoutRef.current();
           return 0;
         }
         return prev - 1;
@@ -138,7 +143,7 @@ export function SpeedCardsGame({ userWords }: SpeedCardsProps) {
       if (["1", "2", "3", "4"].includes(e.key)) {
         const idx = parseInt(e.key, 10) - 1;
         if (idx < options.length) {
-          handleAnswer(options[idx]);
+          handleAnswerRef.current(options[idx]);
         }
       }
     };
@@ -213,6 +218,9 @@ export function SpeedCardsGame({ userWords }: SpeedCardsProps) {
       }, 1500);
     }
   };
+
+  handleTimeoutRef.current = handleTimeout;
+  handleAnswerRef.current = handleAnswer;
 
   const advanceGame = () => {
     if (lives <= 1 && selectedOption !== correctOption && selectedOption !== null) {

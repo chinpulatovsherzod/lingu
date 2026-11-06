@@ -19,6 +19,14 @@ type EvaluationResult = {
   feedback: string;
 };
 
+const LOADING_STAGES = [
+  "Подготовка эссе к анализу...",
+  "Оценка структуры и связности текста (Coherence)...",
+  "Проверка лексического богатства (Lexical Resource)...",
+  "Анализ грамматических конструкций и орфографии...",
+  "Формирование итогового отчета экспертной системы...",
+];
+
 export default function IeltsWritingPage() {
   const [essay, setEssay] = useState("");
   const [result, setResult] = useState<EvaluationResult | null>(null);
@@ -27,20 +35,12 @@ export default function IeltsWritingPage() {
 
   const wordCount = essay.trim() ? essay.trim().split(/\s+/).length : 0;
 
-  const loadingStages = [
-    "Подготовка эссе к анализу...",
-    "Оценка структуры и связности текста (Coherence)...",
-    "Проверка лексического богатства (Lexical Resource)...",
-    "Анализ грамматических конструкций и орфографии...",
-    "Формирование итогового отчета экспертной системы...",
-  ];
-
   useEffect(() => {
     let interval: NodeJS.Timeout;
     if (loading) {
       setLoadingStage(0);
       interval = setInterval(() => {
-        setLoadingStage((prev) => (prev < loadingStages.length - 1 ? prev + 1 : prev));
+        setLoadingStage((prev) => (prev < LOADING_STAGES.length - 1 ? prev + 1 : prev));
       }, 3000);
     }
     return () => clearInterval(interval);
@@ -139,10 +139,10 @@ export default function IeltsWritingPage() {
           <div className="space-y-2">
             <h3 className="font-heading text-lg font-bold text-foreground">Система оценивает работу</h3>
             <p className="text-sm text-muted-foreground max-w-sm font-medium animate-pulse">
-              {loadingStages[loadingStage]}
+              {LOADING_STAGES[loadingStage]}
             </p>
           </div>
-          <Progress value={((loadingStage + 1) / loadingStages.length) * 100} className="w-64 h-1.5" />
+          <Progress value={((loadingStage + 1) / LOADING_STAGES.length) * 100} className="w-64 h-1.5" />
         </Card>
       )}
 

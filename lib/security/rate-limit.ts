@@ -1,6 +1,27 @@
 type Bucket = { count: number; resetAt: number };
 
 const buckets = new Map<string, Bucket>();
+const MAX_BUCKETS = 10_000;
+let lastCleanup = Date.now();
+const CLEANUP_INTERVAL_MS = 60 * 1000;
+
+function cleanupExpired(now: number) {
+  if (now - lastCleanup < CLEANUP_INTERVAL_MS && buckets.size < MAX_BUCKETS) {
+    return;
+  }
+  lastCleanup = now;
+  for (const [key, b] of buckets.entries()) {
+    if (now >= b.resetAt) {
+      buckets.delete(key);
+    }
+  }
+  if (buckets.size > MAX_BUCKETS) {
+    const keysToDelete = Array.from(buckets.keys()).slice(0, 1000);
+    for (const k of keysToDelete) {
+      buckets.delete(k);
+    }
+  }
+}
 
 export function getClientIp(req: Request): string {
   const forwarded = req.headers.get("x-forwarded-for");
@@ -14,6 +35,8 @@ export function rateLimit(
   windowMs: number
 ): { ok: true } | { ok: false; retryAfter: number } {
   const now = Date.now();
+  cleanupExpired(now);
+
   const entry = buckets.get(key);
 
   if (!entry || now >= entry.resetAt) {

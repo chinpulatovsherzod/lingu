@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback, useMemo } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Zap, RotateCcw, Award, CheckCircle2, XCircle } from "lucide-react";
@@ -43,9 +43,12 @@ export function WordMatchGame({ userWords }: { userWords: WordItem[] }) {
   const [xpRewarded, setXpRewarded] = useState(false);
   const [isFinished, setIsFinished] = useState(false);
 
-  const initialWords = userWords && userWords.length >= 4 ? userWords.slice(0, 6) : FALLBACK_WORDS;
+  const initialWords = useMemo(
+    () => (userWords && userWords.length >= 4 ? userWords.slice(0, 6) : FALLBACK_WORDS),
+    [userWords]
+  );
 
-  const initializeGame = () => {
+  const initializeGame = useCallback(() => {
     // Generate 12 cards (6 words + 6 definitions)
     const newCards: CardState[] = [];
     initialWords.forEach((item) => {
@@ -76,11 +79,11 @@ export function WordMatchGame({ userWords }: { userWords: WordItem[] }) {
     setIsLost(false);
     setIsFinished(false);
     setXpRewarded(false);
-  };
+  }, [initialWords]);
 
   useEffect(() => {
     initializeGame();
-  }, [userWords]);
+  }, [initializeGame]);
 
   const handleCardClick = (id: string) => {
     const card = cards.find((c) => c.id === id);

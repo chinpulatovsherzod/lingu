@@ -43,7 +43,17 @@ export const authConfig: NextAuthConfig = {
       const isApiAuth = path.startsWith("/api/auth");
 
       if (isApiAuth) return true;
-      if (path === "/") return true;
+      if (
+        path === "/" ||
+        path === "/sitemap.xml" ||
+        path === "/robots.txt" ||
+        path === "/api/locale" ||
+        path.startsWith("/api/locale/") ||
+        path === "/index.html" ||
+        path === "/icon.png"
+      ) {
+        return true;
+      }
 
       if (!isLoggedIn && !isAuth && !isOnboarding) {
         return false;
